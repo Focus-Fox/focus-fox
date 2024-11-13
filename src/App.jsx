@@ -28,6 +28,7 @@ function App() {
 
   return (
     <>
+      {/* login header */}
       <header>
         <SignedOut>
           <SignInButton />
@@ -36,9 +37,16 @@ function App() {
           <UserButton />
         </SignedIn>
       </header>
+      {/* site title */}
       <h1>Focus Fox</h1>
 
+    {/* hero/main section */}
+    {/* kanban board here- just one */}
+    {/*  */}
+
+
       {/* Display prompts and corresponding AI responses */}
+      {/* someone can style this so it has a little scrolly dealy on the side so there is room for kaban above  */}
       <div>
         {history.map((entry, index) => (
           <div key={index} style={{ marginBottom: "1rem" }}>
