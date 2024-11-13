@@ -16,7 +16,7 @@ function App() {
 
       // Set up the instruction based on whether it's a normal prompt or Kanban-specific
       const finalPrompt = pushToKanban
-        ? `${chatLog[chatLog.length - 1].response}\n\nGenerate HTML with 'card' class elements for the Kanban board.`
+        ? `${chatLog[chatLog.length - 1].response}\n\nGenerate a codebock of html, make each item in this to do list a separate div with a class name of card, put in no styling at all`
         : prompt;
 
       const result = await model.generateContent(finalPrompt);
