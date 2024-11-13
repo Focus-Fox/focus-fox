@@ -1,4 +1,5 @@
 # Focus Fox
-- 3 of us doing backend stuff
-/// blockers
-/// how do we set the environment variables
+// clerk docs, install clerk
+// install Gemini API SDK
+// bash
+`npm install @google/generative-ai`
