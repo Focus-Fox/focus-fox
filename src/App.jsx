@@ -6,29 +6,47 @@ import './App.css';
 function App() {
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
   const [prompt, setPrompt] = useState("");
-  const [history, setHistory] = useState([]); // Array to store prompt-response pairs
+  const [chatLog, setChatLog] = useState([]); // Chat history
+  const [kanbanTasks, setKanbanTasks] = useState({ todo: [], doing: [], done: [] }); // Kanban tasks
 
-  const fetchDataFromGemini = async (e) => {
-    e.preventDefault(); // Prevent page reload on form submission
+  const fetchDataFromGemini = async (pushToKanban = false) => {
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-      // Generate content based on user's prompt
-      const result = await model.generateContent(prompt);
-      const responseText = result.response.text();
+      // Set up the instruction based on whether it's a normal prompt or Kanban-specific
+      const finalPrompt = pushToKanban
+        ? `${chatLog[chatLog.length - 1].response}\n\nGenerate HTML with 'card' class elements for the Kanban board.`
+        : prompt;
 
-      // Add the new prompt-response pair to history
-      setHistory([...history, { prompt, response: responseText }]);
-      setPrompt(""); // Clear input field after submission
+      const result = await model.generateContent(finalPrompt);
+      const aiResponse = result.response.text();
+
+      if (pushToKanban) {
+        // Look for the code block and parse it for Kanban cards
+        const htmlCodeMatch = aiResponse.match(/```([^]+?)```/);
+        if (htmlCodeMatch) {
+          const htmlContent = htmlCodeMatch[1];
+          setKanbanTasks(prev => ({
+            ...prev,
+            todo: [...prev.todo, htmlContent]
+          }));
+        } else {
+          setChatLog([...chatLog, { prompt: finalPrompt, response: "Error: Failed to generate Kanban items. Please try again." }]);
+        }
+      } else {
+        // Normal response; add to chat log
+        setChatLog([...chatLog, { prompt, response: aiResponse }]);
+      }
+      setPrompt(""); // Clear the input
     } catch (error) {
       console.error("Error fetching data from Gemini:", error);
+      setChatLog([...chatLog, { prompt, response: "Error: Unable to fetch data from Gemini." }]);
     }
   };
 
   return (
     <>
-      {/* login header */}
       <header>
         <SignedOut>
           <SignInButton />
@@ -37,36 +55,58 @@ function App() {
           <UserButton />
         </SignedIn>
       </header>
-      {/* site title */}
+      
       <h1>Focus Fox</h1>
-
-    {/* hero/main section */}
-    {/* kanban board here- just one */}
-    {/*  */}
-
-
-      {/* Display prompts and corresponding AI responses */}
-      {/* someone can style this so it has a little scrolly dealy on the side so there is room for kaban above  */}
-      <div>
-        {history.map((entry, index) => (
-          <div key={index} style={{ marginBottom: "1rem" }}>
-            <strong>You:</strong> <p>{entry.prompt}</p>
-            <strong>AI:</strong> <p>{entry.response}</p>
+      <h2>Kanban Board</h2>
+      <div className="kanban-board">
+        <div className="kanban-column">
+          <h3>To Do</h3>
+          <div className="task-list">
+            {kanbanTasks.todo.map((task, index) => (
+              <div key={index} className="card" dangerouslySetInnerHTML={{ __html: task }}></div>
+            ))}
           </div>
-        ))}
+        </div>
+        <div className="kanban-column">
+          <h3>Doing</h3>
+          <div className="task-list">
+            {kanbanTasks.doing.map((task, index) => (
+              <div key={index} className="card">{task}</div>
+            ))}
+          </div>
+        </div>
+        <div className="kanban-column">
+          <h3>Done</h3>
+          <div className="task-list">
+            {kanbanTasks.done.map((task, index) => (
+              <div key={index} className="card">{task}</div>
+            ))}
+          </div>
+        </div>
       </div>
+      <div>
+        <h2>AI Chat</h2>
+        <div className="chat-log">
+          {chatLog.map((entry, index) => (
+            <div key={index}>
+              <p><strong>Prompt:</strong> {entry.prompt}</p>
+              <p><strong>Response:</strong> {entry.response}</p>
+            </div>
+          ))}
+        </div>
+        <form onSubmit={(e) => { e.preventDefault(); fetchDataFromGemini(); }}>
+          <input
+            type="text"
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            placeholder="Enter your prompt here"
+          />
+          <button type="submit">Submit</button>
+        </form>
+        <button onClick={() => fetchDataFromGemini(true)}>Push to Kanban</button>
+      </div>
+      
 
-      {/* Form to submit user prompt */}
-      <form onSubmit={fetchDataFromGemini}>
-        <input
-          type="text"
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          placeholder="Type your prompt here"
-          required
-        />
-        <button type="submit">Submit</button>
-      </form>
     </>
   );
 }
