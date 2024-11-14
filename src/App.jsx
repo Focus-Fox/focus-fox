@@ -13,7 +13,12 @@ function App() {
   const fetchDataFromGemini = async (pushToKanban = false) => {
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      /// if you get a 503 error, try itterating through these models
+      // const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      // const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-8b" });
+      // const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+      // const model = genAI.getGenerativeModel({ model: "gemini-1.0-pro" });
+      // could we have a couple of models here commented out in case of overloading 503 error?
       const finalPrompt = pushToKanban
         ? `${chatLog[chatLog.length - 1].response}\n\nGenerate a code block of HTML, make each item in this to do list a separate div with a class name of card, put in no styling at all`
         : prompt;
@@ -25,6 +30,8 @@ function App() {
         const htmlCodeMatch = aiResponse.match(/```([^]+?)```/);
         if (htmlCodeMatch) {
           const htmlContent = htmlCodeMatch[1];
+          // this is the lump we want to unlump
+          // change it to make the classname of card draggable
           setKanbanTasks(prev => ({
             ...prev,
             todo: [...prev.todo, htmlContent]
@@ -77,6 +84,7 @@ function App() {
           <div
             key={column}
             className="kanban-column"
+            // this is the draggability stuff that 
             onDragOver={(e) => e.preventDefault()}
             onDrop={() => onDrop(column)}
           >
