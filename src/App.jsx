@@ -122,7 +122,7 @@ function App() {
             <input
               type="text"
               value={prompt}
-              onChange={(e) => setPrompt("respond only in html" + e.target.value)}
+              onChange={(e) => setPrompt(e.target.value)}
               placeholder="Enter your prompt here"
             />
             <button type="submit">Submit</button>
