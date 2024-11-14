@@ -1,0 +1,43 @@
+.nav-bar {
+    background: linear-gradient(135deg, #2b1b5c 0%, #1e123f 100%);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    height: 180px;
+  }
+  
+  .nav-bar::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(135deg, #ffb3c6 0%, #ff97b6 100%);
+    clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 100%);
+  }
+  
+  .nav-item {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    backdrop-filter: blur(5px);
+    transition: transform 0.2s;
+  }
+  
+  .nav-item:hover {
+    transform: translateY(-2px);
+  }
+  
+  .logo {
+    width: 80px;
+    height: 80px;
+    background: #3498db;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  }

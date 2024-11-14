@@ -1,0 +1,12 @@
+.fox-tip {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffb3c6;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-align: center;
+    max-width: 90%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }

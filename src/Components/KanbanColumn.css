@@ -1,0 +1,46 @@
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .column-header {
+    background: #1a1a1a;
+    color: white;
+    padding: 1rem;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 500;
+  }
+  
+  .task-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .task-card {
+    padding: 1.5rem;
+    border-radius: 16px;
+    min-height: 120px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+  
+  .task-card:hover {
+    transform: translateY(-2px);
+  }
+  
+  /* Column-specific card colors */
+  .todo-column .task-card {
+    background: #4756c9;
+  }
+  
+  .progress-column .task-card {
+    background: #ff97b6;
+  }
+  
+  .done-column .task-card {
+    background: #3498db;
+  }
