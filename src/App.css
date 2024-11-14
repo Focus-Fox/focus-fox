@@ -1,30 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+
+.titan-one-regular {
+    font-family: "Titan One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+
 :root {
-    --bg-color: #f4f4f9;
-    --text-color: #333;
+    --bg-color: #133f68;
+    /* --text-color: #333;
     --card-bg-color: #ffffff;
     --card-text-color: #333;
     --header-color: #2c3e50;
     --kanban-border: #ddd;
-    --primary-color: #0077cc;
+    --primary-color: #0077cc; */
+    --light-blue: #91c4ea;
+    --light-orange: #faaa58;
+    --orange: #ff7728;
+    --light-purple: #a396ff;
+    --dark-blue-purple: #4f36ad;
+    --lightest-peach: #f6e0df;
+    ---medium-peach: #f37d7b;
+    --dark-peach: #f16251;
   }
   
   body {
-    font-family: Arial, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    width: 100vw;
+    height: 100vh;
+    font-family: "Titan One";
     margin: 0;
-    padding: 0;
+    background-image: url("./assets/Background-img.png");
+    background-repeat: no-repeat;
+    background-size: cover;
   }
   
   header {
     padding: 10px;
-    background-color: var(--header-color);
+    background-color: var(--light-blue);
     color: #fff;
     text-align: center;
   }
   
   h1, h2 {
-    color: var(--header-color);
+    color: var(--dark-peach);
   }
   
   .kanban-board {
@@ -37,14 +56,14 @@
   .kanban-column {
     width: 30%;
     padding: 10px;
-    background-color: var(--bg-color);
-    border: 1px solid var(--kanban-border);
+    background-color: var(--light-orange);
+    border: 1px solid var(--dark-blue-purple);
     border-radius: 8px;
   }
   
   .kanban-column h3 {
     text-align: center;
-    color: var(--primary-color);
+    color: var(--light-purple);
   }
   
   .task-list {
@@ -52,8 +71,8 @@
   }
   
   .card {
-    background-color: var(--card-bg-color);
-    color: var(--card-text-color);
+    background-color: var(--light-blue);
+    color: var(--light-orange);
     padding: 10px;
     margin: 5px 0;
     border-radius: 5px;
