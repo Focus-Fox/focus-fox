@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import  Kanban from "./components/Kanban";
 import './App.css';
 
 function App() {
@@ -72,29 +73,7 @@ function App() {
       
       <h1>Focus Fox</h1>
       <h2>Kanban Board</h2>
-      <div className="kanban-board">
-        {["todo", "doing", "done"].map(column => (
-          <div
-            key={column}
-            className="kanban-column"
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={() => onDrop(column)}
-          >
-            <h3>{column.replace(/^\w/, (c) => c.toUpperCase())}</h3>
-            <div className="task-list">
-              {kanbanTasks[column].map((task, index) => (
-                <div
-                  key={index}
-                  className="card"
-                  dangerouslySetInnerHTML={{ __html: task }}
-                  draggable
-                  onDragStart={() => onDragStart(task, column)}
-                ></div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
+      <Kanban />
       
       <h2>AI Chat</h2>
       <div className="chat-log">
