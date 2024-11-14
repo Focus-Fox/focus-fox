@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
+import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from "@clerk/clerk-react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import './App.css';
 
@@ -9,16 +9,20 @@ function App() {
   const [chatLog, setChatLog] = useState([]); // Chat history
   const [kanbanTasks, setKanbanTasks] = useState({ todo: [], doing: [], done: [] }); // Kanban tasks
   const [draggedTask, setDraggedTask] = useState(null); // Track the dragged task
+  /// clerk stuff
+  const { isSignedIn } = useUser(); // useUser provides isSignedIn and user information
+  // `isUserLoggedIn` is true if user is signed in, false if not
+  const isUserLoggedIn = isSignedIn ?? false;
 
   const fetchDataFromGemini = async (pushToKanban = false) => {
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
       /// if you get a 503 error, try itterating through these models
+      /// could also do an if else for this if they aren't working
       // const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-      // const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-8b" });
+      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-8b" });
       // const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
       // const model = genAI.getGenerativeModel({ model: "gemini-1.0-pro" });
-      // could we have a couple of models here commented out in case of overloading 503 error?
       const finalPrompt = pushToKanban
         ? `${chatLog[chatLog.length - 1].response}\n\nGenerate a code block of HTML, make each item in this to do list a separate div with a class name of card, put in no styling at all`
         : prompt;
@@ -31,7 +35,6 @@ function App() {
         if (htmlCodeMatch) {
           const htmlContent = htmlCodeMatch[1];
           // this is the lump we want to unlump
-          // change it to make the classname of card draggable
           setKanbanTasks(prev => ({
             ...prev,
             todo: [...prev.todo, htmlContent]
@@ -72,57 +75,68 @@ function App() {
 
   return (
     <>
-      <header>
-        <SignedOut><SignInButton /></SignedOut>
-        <SignedIn><UserButton /></SignedIn>
-      </header>
-      
-      <h1>Focus Fox</h1>
-      <h2>Kanban Board</h2>
-      <div className="kanban-board">
-        {["todo", "doing", "done"].map(column => (
-          <div
-            key={column}
-            className="kanban-column"
-            // this is the draggability stuff that 
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={() => onDrop(column)}
-          >
-            <h3>{column.replace(/^\w/, (c) => c.toUpperCase())}</h3>
-            <div className="task-list">
-              {kanbanTasks[column].map((task, index) => (
-                <div
-                  key={index}
-                  className="card"
-                  dangerouslySetInnerHTML={{ __html: task }}
-                  draggable
-                  onDragStart={() => onDragStart(task, column)}
-                ></div>
-              ))}
-            </div>
+      {isUserLoggedIn ? (
+        <div>
+          <header>
+            <SignedOut><SignInButton /></SignedOut>
+            <SignedIn><UserButton /></SignedIn>
+          </header>
+
+          <h1>Focus Fox</h1>
+          <h2>Kanban Board</h2>
+          <div className="kanban-board">
+            {["todo", "doing", "done"].map(column => (
+              <div
+                key={column}
+                className="kanban-column"
+                // this is the draggability stuff that 
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={() => onDrop(column)}
+              >
+                <h3>{column.replace(/^\w/, (c) => c.toUpperCase())}</h3>
+                <div className="task-list">
+                  {kanbanTasks[column].map((task, index) => (
+                    <div
+                      key={index}
+                      className="card"
+                      dangerouslySetInnerHTML={{ __html: task }}
+                      draggable
+                      onDragStart={() => onDragStart(task, column)}
+                    ></div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      
-      <h2>AI Chat</h2>
-      <div className="chat-log">
-        {chatLog.map((entry, index) => (
-          <div key={index}>
-            <p><strong>Prompt:</strong> {entry.prompt}</p>
-            <p><strong>Response:</strong> {entry.response}</p>
+
+          <h2>AI Chat</h2>
+          <div className="chat-log">
+            {chatLog.map((entry, index) => (
+              <div key={index}>
+                <p><strong>Prompt:</strong> {entry.prompt}</p>
+                <p><strong>Response:</strong> {entry.response}</p>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <form onSubmit={(e) => { e.preventDefault(); fetchDataFromGemini(); }}>
-        <input
-          type="text"
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          placeholder="Enter your prompt here"
-        />
-        <button type="submit">Submit</button>
-      </form>
-      <button onClick={() => fetchDataFromGemini(true)}>Push to Kanban</button>
+          <form onSubmit={(e) => { e.preventDefault(); fetchDataFromGemini(); }}>
+            <input
+              type="text"
+              value={prompt}
+              onChange={(e) => setPrompt("respond only in html" + e.target.value)}
+              placeholder="Enter your prompt here"
+            />
+            <button type="submit">Submit</button>
+          </form>
+          <button onClick={() => fetchDataFromGemini(true)}>Push to Kanban</button>
+
+        </div>
+      ) : (
+        <header>
+          <SignedOut><SignInButton /></SignedOut>
+          <SignedIn><UserButton /></SignedIn>
+        </header>
+      )}
+
     </>
   );
 }
