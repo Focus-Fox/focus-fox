@@ -13,6 +13,6 @@ they don't need to login to use app
 in the kanban board, it says html at the top, then the whole thing moves from section to section and not each card 
 
 ### todays list 
-1. first
+1. add brand colors to css root
 2. second
 3. third
