@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from "@clerk/clerk-react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import Finley from './assets/Fox-Logo.png'
+import Finley from './assets/newFinleyLogo.png'
 import './App.css';
 
 function App() {
@@ -93,6 +93,9 @@ function App() {
             <SignedOut><SignInButton /></SignedOut>
             <SignedIn><UserButton /></SignedIn>
           </header>
+          <div className="logo-container">
+        <img id="finley" src={Finley} alt="Logo" />
+      </div>
           <div className="container">
           <h1 className="title">Focus Fox</h1>
           <div className="kanban-board">

@@ -138,6 +138,22 @@ button {
     background-color: rgba(178, 168, 186, 0.726);
     border-radius: 5px;
   }
+  .logo-container {
+  position: relative; /* Keeps it in the same place even when scrolling */
+  top: 1px; /* Adjust the position */
+  left: 10px; /* Adjust the position */
+  z-index: 1000; /* Ensures it stays above other elements */
+ 
+}
+
+.logo-container img {
+  width: 100px; /* Adjust size */
+  height: auto;
+}
+#finley {
+  width: 500px;
+  /* border-radius: 50px; */
+}
   /* @media (min-width: 650px) {
     
   
