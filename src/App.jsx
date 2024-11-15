@@ -119,6 +119,7 @@ function App() {
           </div>
 
           <h2>AI Chat</h2>
+          {/* opaque white bg, rgba colors - a is opacity 0-1 */}
           <div className="chat-log">
             {chatLog.map((entry, index) => (
               <div key={index}>
@@ -128,6 +129,7 @@ function App() {
             ))}
           </div>
           <form onSubmit={(e) => { e.preventDefault(); fetchDataFromGemini(); }}>
+           {/* change to textarea */}
             <input
               type="text"
               value={prompt}
