@@ -85,6 +85,7 @@ function App() {
 
   return (
     <>
+    <div className="container">
       {isUserLoggedIn ? (
         <div>
           <header className="head-bar">
@@ -145,7 +146,7 @@ function App() {
           <SignedIn><UserButton /></SignedIn>
         </header>
       )}
-
+</div>
     </>
   );
 }
