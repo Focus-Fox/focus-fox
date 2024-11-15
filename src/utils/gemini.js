@@ -23,7 +23,7 @@ export async function processWithGemini(input) {
       .split('\n') // Split by new lines
       .filter(line => line.trim()) // Remove empty lines
       .map(line => line.replace(/^\d+\.\s*/, '').trim()) // Remove numbering and extra spaces
-      .filter(task => task.length > 0) // Remove empty tasks
+      .filter(task => task.length > 0); // Remove empty tasks
   } catch (error) {
     console.error('Error processing with Gemini:', error);
     throw error;
