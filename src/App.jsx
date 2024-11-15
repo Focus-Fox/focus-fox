@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from "@clerk/clerk-react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import Finley from './assets/Fox-Logo.png'
 import './App.css';
 
 function App() {
@@ -85,14 +86,14 @@ function App() {
 
   return (
     <>
-    <div className="container">
+    
       {isUserLoggedIn ? (
         <div>
           <header className="head-bar">
             <SignedOut><SignInButton /></SignedOut>
             <SignedIn><UserButton /></SignedIn>
           </header>
-
+          <div className="container">
           <h1 className="title">Focus Fox</h1>
           <div className="kanban-board">
             {["todo", "doing", "done"].map(column => (
@@ -130,25 +131,28 @@ function App() {
           </div>
           <form onSubmit={(e) => { e.preventDefault(); fetchDataFromGemini(); }}>
            {/* change to textarea */}
-            <input
+            <textarea
               type="text"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
-              placeholder="Enter your prompt here"
-            />
+              rows="4"
+              cols="50"
+            >Enter your prompt here</textarea>
             <button type="submit">Submit</button>
           </form>
-          <button onClick={() => fetchDataFromGemini(true)}>Push to Kanban</button>
-
+          <button className="to-kanban" onClick={() => fetchDataFromGemini(true)}>Push to Kanban</button>
+          </div>
         </div>
       ) : (
         // Login Page
+        <div className="container">
         <header>
           <SignedOut><SignInButton /></SignedOut>
           <SignedIn><UserButton /></SignedIn>
         </header>
+        </div>
       )}
-</div>
+
     </>
   );
 }

@@ -32,7 +32,7 @@
   
   body {
     width: 100vw;
-    height: 100vh;
+    height: 150vh;
     font-family: "Work Sans";
     margin: 0;
     background-image: url("./assets/Background-img.png");
@@ -40,10 +40,7 @@
     background-size: cover;
   }
 
-  .container {
-    display: flex;
-    justify-content: center;
-  }
+
   
   
   header {
@@ -58,33 +55,68 @@
     background-image: url("./assets/header-image.png");
     z-index: 1;
   }
-  
-  h1, h2 {
-    color: var(--light-pink);
+  .container {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 1rem;
+    padding: 1rem;
   }
+  
+  h1 {
+    color: var(--medium-blue);
+  }
+  h2 {
+    grid-row: 2/3;
+    padding: 1rem;
+    color: var(--light-pink);
+    background-color: var(--dark-grey);
+    border-radius: 5px;
+  }
+button {
+  padding: .5rem;
+  background-color: var(--purple);
+  color: var(--light-pink);
+  border-radius: 5px;
+}
   .title {
+    padding: 1rem;
     color: var(--light-pink);
+    background-color: var(--dark-grey);
+    border-radius: 5px;
   }
-  
+  form {
+    display: grid;
+    gap: .5rem;
+    justify-items: center;
+  }
+  textarea {
+    margin: .5rem;
+    border-radius: 5px;
+  }
+  .to-kanban {
+    grid-row: 5/6;
+  }
   .kanban-board {
     display: flex;
     justify-content: space-between;
     padding: 20px;
     gap: 10px;
+    grid-row: 6/7;
   }
   
   .kanban-column {
     width: 30%;
     padding: 10px;
-    background-color: var(--dark-blue);
+    background-color: var(--light-pink);
     border: 1px solid var(--dark-blue-purple);
     border-radius: 8px;
   }
   
   .kanban-column h3 {
     text-align: center;
-    color: var(--white);
-    background-color: var(--black);
+    color: var(--dark-blue);
+    background-color: none;
   }
   
   .task-list {
@@ -100,3 +132,65 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     cursor: move;
   }
+  .chat-log {
+    padding: .5rem;
+    grid-row: 4/5;
+    background-color: rgba(178, 168, 186, 0.726);
+    border-radius: 5px;
+  }
+  /* @media (min-width: 650px) {
+    
+  
+    .grid-container {
+      display: grid;
+      width: 100vw;
+      height: 100vh;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(7, 1fr);
+      border: 2px red solid;
+      /* grid-template-areas: 
+      a a b b
+      c c b b 
+      c c b b 
+      d d b b     
+      f f f f
+      f f f f
+      f f f f; */
+     /* gap: 1rem;
+      padding: 1rem;
+    };
+  
+    h2 {
+      padding-top: 2rem;
+      grid-row: 1/2;
+  
+  
+    }
+  
+    .chat-log {
+      grid-row: 2/5;
+      grid-column: 3/4;
+      font-family: "Work Sans";
+    }
+  form {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+    border-radius: 5px;
+    grid-row: 2/4;
+    grid-column: 1/3;
+    padding-left: 1rem;
+  
+  }
+  .to-kanban {
+  grid-row: 4/5;
+  grid-column: 2/3;
+  width: 10rem;
+  margin-left: -1rem;
+   
+  }
+  .kanban-board {
+    grid-row: 5/8;
+    grid-column: 1/5 ;
+  }
+  } */
