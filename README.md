@@ -1,8 +1,9 @@
 # Focus Fox
 description 
 
-### instructions 
-- clerk docs, install clerk
-`there will be another thing to type in here to get clerk runing`
-- install Gemini API SDK
-`npm install @google/generative-ai`
+## Instructions 
+`npm install`
+`npm run dev`
+
+### Test Prompt
+It is 2pm, before 6pm, I need to take a shower, eat a snack and go to a meeting, please create a simple schedule for me with this in mind. 
