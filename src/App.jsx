@@ -5,28 +5,35 @@ import './App.css';
 
 function App() {
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-  const [prompt, setPrompt] = useState("");
+  const [prompt, setPrompt] = useState(""); // users entry
   const [chatLog, setChatLog] = useState([]); // Chat history
   const [kanbanTasks, setKanbanTasks] = useState({ todo: [], doing: [], done: [] }); // Kanban tasks
   const [draggedTask, setDraggedTask] = useState(null); // Track the dragged task
-  /// clerk stuff
   const { isSignedIn } = useUser(); // useUser provides isSignedIn and user information
-  // `isUserLoggedIn` is true if user is signed in, false if not
   const isUserLoggedIn = isSignedIn ?? false;
+
+    // Helper function to split the cards
+    const splitCards = (htmlString) => {
+      // Regex to match each <div class="card">...</div> as a separate item
+      return htmlString.match(/<div class="card">.*?<\/div>/g) || [];
+    };
 
   const fetchDataFromGemini = async (pushToKanban = false) => {
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
+
       /// if you get a 503 error, try itterating through these models
-      /// could also do an if else for this if they aren't working
       // const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-8b" });
       // const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
       // const model = genAI.getGenerativeModel({ model: "gemini-1.0-pro" });
+
+      // Constructs the final prompt which whill be pushed to the kanban board and not seen by the user
       const finalPrompt = pushToKanban
+        // Takes last item of chat log and adds instructions to make the response in a codeblock of HTML
         ? `${chatLog[chatLog.length - 1].response}\n\nGenerate a code block of HTML, make each item in this to do list a separate div with a class name of card, put in no styling at all`
         : prompt;
-
+      
       const result = await model.generateContent(finalPrompt);
       const aiResponse = result.response.text();
 
@@ -34,6 +41,7 @@ function App() {
         const htmlCodeMatch = aiResponse.match(/```([^]+?)```/);
         if (htmlCodeMatch) {
           const htmlContent = htmlCodeMatch[1];
+          console.log(kanbanTasks)
           // this is the lump we want to unlump
           setKanbanTasks(prev => ({
             ...prev,
@@ -52,17 +60,16 @@ function App() {
     }
   };
 
-  // Drag functions
+
+  // Drag functionality
   const onDragStart = (task, column) => {
     setDraggedTask({ task, column });
   };
-
   const onDrop = (targetColumn) => {
     if (draggedTask) {
       setKanbanTasks(prev => {
         const sourceColumn = prev[draggedTask.column].filter(t => t !== draggedTask.task);
         const targetColumnTasks = [...prev[targetColumn], draggedTask.task];
-
         return {
           ...prev,
           [draggedTask.column]: sourceColumn,
@@ -72,6 +79,7 @@ function App() {
       setDraggedTask(null); // Reset dragged task
     }
   };
+
 
   return (
     <>
@@ -89,7 +97,6 @@ function App() {
               <div
                 key={column}
                 className="kanban-column"
-                // this is the draggability stuff that 
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={() => onDrop(column)}
               >
@@ -131,6 +138,7 @@ function App() {
 
         </div>
       ) : (
+        // Login Page
         <header>
           <SignedOut><SignInButton /></SignedOut>
           <SignedIn><UserButton /></SignedIn>
