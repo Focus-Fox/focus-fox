@@ -87,13 +87,12 @@ function App() {
     <>
       {isUserLoggedIn ? (
         <div>
-          <header>
+          <header className="head-bar">
             <SignedOut><SignInButton /></SignedOut>
             <SignedIn><UserButton /></SignedIn>
           </header>
 
-          <h1>Focus Fox</h1>
-          <h2>Kanban Board</h2>
+          <h1 className="title">Focus Fox</h1>
           <div className="kanban-board">
             {["todo", "doing", "done"].map(column => (
               <div

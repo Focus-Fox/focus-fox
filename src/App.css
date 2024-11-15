@@ -1,34 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Titan+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
-.titan-one-regular {
-    font-family: "Titan One", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-  }
+/* body font */
+.work-sans {
+  font-family: "Work Sans", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+/* nav bar font & sign on page */
+.raleway {
+  font-family: "Raleway", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
   
 
 :root {
-    --bg-color: #133f68;
-    /* --text-color: #333;
-    --card-bg-color: #ffffff;
-    --card-text-color: #333;
-    --header-color: #2c3e50;
-    --kanban-border: #ddd;
-    --primary-color: #0077cc; */
-    --light-blue: #91c4ea;
-    --light-orange: #faaa58;
-    --orange: #ff7728;
-    --light-purple: #a396ff;
-    --dark-blue-purple: #4f36ad;
-    --lightest-peach: #f6e0df;
-    ---medium-peach: #f37d7b;
-    --dark-peach: #f16251;
+  --black: #000000;
+  --dark-blue: #133f68;
+  --medium-blue: #1382ba;
+  --dark-grey: #212121;
+  --purple: #2e3f99;
+  --medium-grey: ##919191;
+  --light-grey: #b9c8d5
+  --dark-pink: #ea8b98;
+  --light-pink: #f7ccce;
+  --white: #ffffff;
   }
   
   body {
     width: 100vw;
     height: 100vh;
-    font-family: "Titan One";
+    font-family: "Work Sans";
     margin: 0;
     background-image: url("./assets/Background-img.png");
     background-repeat: no-repeat;
@@ -37,13 +42,22 @@
   
   header {
     padding: 10px;
-    background-color: var(--light-blue);
+    /* background-color: var(--light-blue); */
+    
+   
     color: #fff;
     text-align: center;
   }
+  header, .head-bar {
+    background-image: url("./assets/header-image.png");
+    z-index: 1;
+  }
   
   h1, h2 {
-    color: var(--dark-peach);
+    color: var(--light-pink);
+  }
+  .title {
+    color: var(--light-pink);
   }
   
   .kanban-board {
@@ -56,14 +70,15 @@
   .kanban-column {
     width: 30%;
     padding: 10px;
-    background-color: var(--light-orange);
+    background-color: var(--dark-blue);
     border: 1px solid var(--dark-blue-purple);
     border-radius: 8px;
   }
   
   .kanban-column h3 {
     text-align: center;
-    color: var(--light-purple);
+    color: var(--white);
+    background-color: var(--black);
   }
   
   .task-list {
