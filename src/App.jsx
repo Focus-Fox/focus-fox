@@ -3,6 +3,7 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-reac
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import  Kanban from "./components/Kanban";
 import './App.css';
+import { processWithGemini } from "./utils/gemini";
 
 function App() {
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
@@ -73,9 +74,33 @@ function App() {
       
       <h1>Focus Fox</h1>
       <h2>Kanban Board</h2>
-      <Kanban />
-      
-      <h2>AI Chat</h2>
+      <div className="kanban-board">
+        {["todo", "doing", "done"].map(column => (
+          <div
+            key={column}
+            className="kanban-column"
+            onDragOver={(e) => e.preventDefault()}
+            onDrop={() => onDrop(column)}
+          >
+            <h3>{column.replace(/^\w/, (c) => c.toUpperCase())}</h3>
+            <div className="task-list">
+              {kanbanTasks[column].map((task, index) => (
+                <div
+                  key={index}
+                  className="card"
+                  dangerouslySetInnerHTML={{ __html: task }}
+                  draggable
+                  onDragStart={() => onDragStart(task, column)}
+                ></div>
+              ))}
+            </div>
+          </div>
+        ))}
+    </div> 
+
+
+
+      {/* <h2>AI Chat</h2>
       <div className="chat-log">
         {chatLog.map((entry, index) => (
           <div key={index}>
@@ -83,17 +108,17 @@ function App() {
             <p><strong>Response:</strong> {entry.response}</p>
           </div>
         ))}
-      </div>
-      <form onSubmit={(e) => { e.preventDefault(); fetchDataFromGemini(); }}>
+      </div> */}
+      <form onSubmit={(e) => { e.preventDefault()}}>
         <input
           type="text"
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
           placeholder="Enter your prompt here"
         />
-        <button type="submit">Submit</button>
+        <button onClick={() => processWithGemini(prompt)} type="submit">Submit</button>
       </form>
-      <button onClick={() => fetchDataFromGemini(true)}>Push to Kanban</button>
+      {/* <button onClick={() => fetchDataFromGemini(prompt)}>Push to Kanban</button> */}
     </>
   );
 }
