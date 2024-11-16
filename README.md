@@ -1,6 +1,7 @@
 # Focus Fox
 
 **Focus Fox** is a friendly AI-powered productivity tool designed to help users organize their thoughts and prioritize tasks. Built for people with ADHD, mental health challenges, or anyone needing a productivity boost, Focus Fox simplifies task management in an intuitive and supportive way.
+- [See a live demo!](https://focus-fox-app.netlify.app/)
 
 ## Key Features
 - **Brain Dump**: Share your thoughts with Finley the Fox, who organizes them into actionable tasks.  
