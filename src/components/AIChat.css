@@ -1,0 +1,22 @@
+.chat-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+ 
+.chat-log {
+  padding: .5rem;
+  background-color: rgba(178, 168, 186, 0.726);
+  border-radius: 5px;
+}
+textarea {
+  margin: .5rem;
+  border-radius: 5px;
+}
+form {
+  display: grid;
+  gap: .5rem;
+  justify-items: center;
+}

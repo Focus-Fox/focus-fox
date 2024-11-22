@@ -1,3 +1,7 @@
+// Do you think you could get it to start the chat? Maybe something like:
+// "I'm here to help you create your daily schedule, dump your brain,
+// then we can iterate and you can push your to do list to a crispy little tool"
+
 const {
     GoogleGenerativeAI,
     HarmCategory,
