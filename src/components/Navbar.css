@@ -1,0 +1,88 @@
+header {
+    height: 60px; /* fixed height */
+    background-color: rgba(255, 255, 255, .8); /* opaque white background */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+/* some of the other css is superceding this I think */
+header h1 {
+    padding-left: 1rem;
+}
+nav {
+    margin-right: 2rem;
+}
+nav ul {
+    list-style: none;
+    margin: 0;
+}
+nav a {
+    text-decoration: none;
+}
+nav ul {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+/* nav links */
+li {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* hamburger menu */
+.hamburger-menu {
+    display: none;
+    padding-right: 1rem;
+}
+.open-menu {
+    max-width: 2.2rem;
+    width: auto;
+    height: auto;
+    padding-bottom: .16rem;
+    cursor: pointer;
+}
+.close-menu {
+    max-width: 2.2rem;
+    width: auto;
+    height: auto;
+    padding-bottom: .16rem;
+    cursor: pointer
+}
+
+/* Media Queries */
+/* kinda wanna switch it so all of the media queries and stuff are mobile first  */
+@media (max-width: 650px) {
+    .hamburger-menu {
+        display: flex;
+    }
+    .changing-nav {
+        margin: 0;
+        position: absolute; /* Allows precise placement */
+        right: 0; /* Align to the right edge */
+        border-radius: 0rem 0rem 0rem .8rem; /* only bottom left corner rounded */
+        background: rgba(255, 255, 255, .8); /* opaque white background */;
+        display: none;
+        top: 60px; /* underneath 60px header */
+        width: 50%;
+        height: 12rem;
+        padding: 0;
+    }
+    .changing-nav ul {
+        display: flex;
+        flex-direction: column;
+        padding-top: .6rem;
+      }
+    .close-menu {
+        display: none;
+    }
+}
+
+/* shows hamburger menu pieces */
+.show {
+    display: block;
+}
+.hide {
+    display: none;
+}

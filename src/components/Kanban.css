@@ -1,0 +1,45 @@
+/* removed grid */
+
+.kanban-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+ 
+.kanban-board {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.2rem;
+  gap: 1rem;
+}
+
+.kanban-column {
+  min-width: 8rem; /* may be a better way to accomplish this */
+  padding: 1rem;
+  background-color: var(--light-pink);
+  border: 1px solid var(--dark-blue-purple);
+  border-radius: 8px;
+}
+
+.kanban-column h3 {
+  text-align: center;
+  color: var(--dark-blue);
+  background-color: none;
+}
+
+.task-list {
+  min-height: 100px;
+}
+
+.card {
+  background-color: var(--light-blue);
+  color: var(--light-orange);
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: move;
+}

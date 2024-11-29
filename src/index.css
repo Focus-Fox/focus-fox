@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --black: #000000;
+  --dark-blue: #133f68;
+  --medium-blue: #1382ba;
+  --dark-grey: #212121;
+  --purple: #2e3f99;
+  --medium-grey: ##919191;
+  --light-grey: #b9c8d5;
+  --dark-pink: #ea8b98;
+  --light-pink: #f7ccce;
+  --white: #ffffff;
+}
+
+body {
+  font-family: "Work Sans";
+  margin: 0;
+}
+
+h1 {
+  color: var(--medium-blue);
+}
+h2 {
+  color: var(--light-pink);
+}

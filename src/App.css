@@ -1,4 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+/* NEW */
+/* login page; second condition of App.jsx */
+.login-page-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+/* facilitates sticky footer */
+.app-container {
+  position: absolute;
+  min-height: 100%;
+  width: 100%;
+  /* moved background image here! */
+  background-image: url("./assets/Background-img.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.content-wrap {
+  padding-bottom: 2.5rem;
+}
+
+/* Finley Fox Logo */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+.logo-container img {
+  width: 5rem;
+  height: auto;
+}
+
+
 
 /* body font */
 .work-sans {
@@ -7,154 +42,109 @@
   font-weight: 400;
   font-style: normal;
 }
+
 /* nav bar font & sign on page */
-.raleway {
+/* .raleway {
   font-family: "Raleway", serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-}
+} */
 
-  
-
-:root {
-  --black: #000000;
-  --dark-blue: #133f68;
-  --medium-blue: #1382ba;
-  --dark-grey: #212121;
-  --purple: #2e3f99;
-  --medium-grey: ##919191;
-  --light-grey: #b9c8d5
-  --dark-pink: #ea8b98;
-  --light-pink: #f7ccce;
-  --white: #ffffff;
-  }
-  
-  body {
-    width: 100vw;
-    height: 150vh;
-    font-family: "Work Sans";
-    margin: 0;
-    background-image: url("./assets/Background-img.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
+/* .container {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 1rem;
+  padding: 1rem;
+} */
 
 
-  
-  
-  header {
-    padding: 10px;
-    /* background-color: var(--light-blue); */
-    
-   
-    color: #fff;
-    text-align: center;
-  }
-  header, .head-bar {
-    background-image: url("./assets/header-image.png");
-    z-index: 1;
-  }
-  .container {
-    display: grid;
-    grid-template-columns: 1fr;
-    justify-items: center;
-    gap: 1rem;
-    padding: 1rem;
-  }
-  
-  h1 {
-    color: var(--medium-blue);
-  }
-  h2 {
-    grid-row: 2/3;
-    padding: 1rem;
-    color: var(--light-pink);
-    background-color: var(--dark-grey);
-    border-radius: 5px;
-  }
+
 button {
   padding: .5rem;
   background-color: var(--purple);
   color: var(--light-pink);
   border-radius: 5px;
 }
-  .title {
-    padding: 1rem;
-    color: var(--light-pink);
-    background-color: var(--dark-grey);
-    border-radius: 5px;
-  }
-  form {
-    display: grid;
-    gap: .5rem;
-    justify-items: center;
-  }
-  textarea {
-    margin: .5rem;
-    border-radius: 5px;
-  }
-  .to-kanban {
-    grid-row: 5/6;
-  }
-  .kanban-board {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    gap: 10px;
-    grid-row: 6/7;
-  }
-  
-  .kanban-column {
-    width: 30%;
-    padding: 10px;
-    background-color: var(--light-pink);
-    border: 1px solid var(--dark-blue-purple);
-    border-radius: 8px;
-  }
-  
-  .kanban-column h3 {
-    text-align: center;
-    color: var(--dark-blue);
-    background-color: none;
-  }
-  
-  .task-list {
-    min-height: 100px;
-  }
-  
-  .card {
-    background-color: var(--light-blue);
-    color: var(--light-orange);
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    cursor: move;
-  }
-  .chat-log {
-    padding: .5rem;
-    grid-row: 4/5;
-    background-color: rgba(178, 168, 186, 0.726);
-    border-radius: 5px;
-  }
-  .logo-container {
-  position: relative; /* Keeps it in the same place even when scrolling */
-  top: 1px; /* Adjust the position */
-  left: 10px; /* Adjust the position */
-  z-index: 1000; /* Ensures it stays above other elements */
- 
-}
 
-.logo-container img {
-  width: 100px; /* Adjust size */
-  height: auto;
-}
-#finley {
-  width: 500px;
-  /* border-radius: 50px; */
-}
-  /* @media (min-width: 650px) {
+/* .title {
+  padding: 1rem;
+  color: var(--light-pink);
+  background-color: var(--dark-grey);
+  border-radius: 5px;
+} */
+
+/* form {
+  display: grid;
+  gap: .5rem;
+  justify-items: center;
+} */
+
+/* textarea {
+  margin: .5rem;
+  border-radius: 5px;
+} */
+
+/* .to-kanban {
+  grid-row: 5/6;
+} */
+
+/* .kanban-board {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  gap: 10px;
+  grid-row: 6/7;
+} */
+
+/* .kanban-column {
+  width: 30%;
+  padding: 10px;
+  background-color: var(--light-pink);
+  border: 1px solid var(--dark-blue-purple);
+  border-radius: 8px;
+} */
+
+/* .kanban-column h3 {
+  text-align: center;
+  color: var(--dark-blue);
+  background-color: none;
+} */
+
+/* .task-list {
+  min-height: 100px;
+} */
+
+/* .card {
+  background-color: var(--light-blue);
+  color: var(--light-orange);
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: move;
+} */
+
+/* .chat-log {
+  padding: .5rem;
+  grid-row: 4/5;
+  background-color: rgba(178, 168, 186, 0.726);
+  border-radius: 5px;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+/* @media (min-width: 650px) {
     
   
     .grid-container {
@@ -172,7 +162,7 @@ button {
       f f f f
       f f f f
       f f f f; */
-     /* gap: 1rem;
+/* gap: 1rem;
       padding: 1rem;
     };
   
