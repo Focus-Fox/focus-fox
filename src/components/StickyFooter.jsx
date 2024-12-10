@@ -7,7 +7,7 @@ function StickyFooter() {
         <>
             <footer className='sticky-footer' id="footer">
                 {/* Change this */}
-                <p>made with love.</p>
+                <p>made with love and care.</p>
             </footer>
         </>
     )

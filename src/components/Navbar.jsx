@@ -25,7 +25,7 @@ function Navbar() {
             <nav className='changing-nav'>
                 <ul>
                     <li>
-                        <Link to="/">Home is where the heart.</Link>
+                        <Link to="/">Home</Link>
                     </li>
                     <li>
                         <Link to="/about">About</Link>
