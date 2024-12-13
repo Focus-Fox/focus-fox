@@ -25,16 +25,18 @@ function ChatKanban() {
             // Constructs the final prompt which whill be pushed to the kanban board and not seen by the user
             const finalPrompt = pushToKanban
                 // Takes last item of chat log and adds instructions to make the response in a codeblock of HTML
-                ? `${chatLog[chatLog.length - 1].response}\n\nGenerate a code block of HTML, make each item in this to do list a separate div with a class name of card, put in no styling at all`
+                ? `${chatLog[chatLog.length - 1].response}\n\nGenerate a code block of HTML, make each item in this to do list a separate div with a class name of card, put in no styling at all, only include the 'card' divs, do not include any head or body tags or anything like that.`
                 : prompt;
 
             const result = await model.generateContent(finalPrompt);
             const aiResponse = result.response.text();
 
             if (pushToKanban) {
+                console.log("kanban GO!!!")
                 const htmlCodeMatch = aiResponse.match(/```([^]+?)```/);
                 if (htmlCodeMatch) {
                     const htmlContent = htmlCodeMatch[1];
+                    console.log("html content", htmlContent);
                     const separatedCards = splitCards(htmlContent); // Separate the cards
                     console.log("Separated cards:", separatedCards);
                     // this is the lump we want to unlump

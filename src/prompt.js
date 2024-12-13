@@ -55,8 +55,8 @@ import {
       ],
     });
   
-    const result = await chatSession.sendMessage("INSERT_INPUT_HERE");
-    console.log(result.response.text());
+    // const result = await chatSession.sendMessage("INSERT_INPUT_HERE");
+    // console.log(result.response.text());
   }
   
   await run();
