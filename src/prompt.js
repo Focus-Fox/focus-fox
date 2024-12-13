@@ -2,13 +2,13 @@
 // "I'm here to help you create your daily schedule, dump your brain,
 // then we can iterate and you can push your to do list to a crispy little tool"
 
-const {
+import {
     GoogleGenerativeAI,
     HarmCategory,
     HarmBlockThreshold,
-  } = require("@google/generative-ai");
+  } from "@google/generative-ai";
   
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = "AIzaSyB5wcnHqx5PZLVtSTn00lX0TQLJP6vtMK4";
   const genAI = new GoogleGenerativeAI(apiKey);
   
   const model = genAI.getGenerativeModel({
@@ -59,5 +59,6 @@ const {
     console.log(result.response.text());
   }
   
-  run();
+  await run();
+  export default model;
   

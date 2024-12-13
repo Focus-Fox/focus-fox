@@ -5,9 +5,10 @@ import Kanban from "../components/Kanban";
 import AIChat from "../components/AIChat";
 // styles
 import './ChatKanban.css';
+import model from "../prompt.js"
 
 function ChatKanban() {
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    
     const [prompt, setPrompt] = useState(""); // users entry
     const [chatLog, setChatLog] = useState([]); // Chat history
     const [kanbanTasks, setKanbanTasks] = useState({ todo: [], doing: [], done: [] }); // Kanban tasks
@@ -21,14 +22,6 @@ function ChatKanban() {
 
     const fetchDataFromGemini = async (pushToKanban = false) => {
         try {
-            const genAI = new GoogleGenerativeAI(apiKey);
-
-            /// if you get a 503 error, try itterating through these models
-            // const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-            // const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-8b" });
-            const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
-            // const model = genAI.getGenerativeModel({ model: "gemini-1.0-pro" });
-
             // Constructs the final prompt which whill be pushed to the kanban board and not seen by the user
             const finalPrompt = pushToKanban
                 // Takes last item of chat log and adds instructions to make the response in a codeblock of HTML
